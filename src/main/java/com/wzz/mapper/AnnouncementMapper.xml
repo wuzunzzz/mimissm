@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wzz.mapper.AnnouncementMapper">
+    <select id="getAll" resultType="com.wzz.pojo.Announcement">
+        select * from  announcement
+    </select>
+
+    <delete id="delete" parameterType="int">
+        delete from announcement where id=#{id}
+    </delete>
+
+    <insert id="add" parameterType="com.wzz.pojo.Announcement" >
+        insert into announcement (text)
+        values (#{text})
+    </insert>
+
+    <update id="update" parameterType="com.wzz.pojo.Announcement">
+        update announcement set text = #{text} where id = #{id}
+    </update>
+
+    <select id="getById"  parameterType="java.lang.Integer" resultType="com.wzz.pojo.Announcement">
+        select
+        *
+        from announcement
+        where id = #{id}
+    </select>
+
+    <delete id="deleteBatch" >
+        delete from announcement where id  in
+        <foreach collection="array" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
